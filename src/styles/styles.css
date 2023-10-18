@@ -1,0 +1,82 @@
+@import 'normalize.css/normalize.css';
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1320px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  width: calc(100% + 30px);
+}
+
+.col {
+  flex: 1;
+  padding: 15px;
+}
+
+.col_1 {
+  min-width: 8.3333333333%;
+  max-width: 8.3333333333%;
+}
+
+.col_2 {
+  min-width: 16.6666666667%;
+  max-width: 16.6666666667%;
+}
+
+.col_3 {
+  min-width: 25%;
+  max-width: 25%;
+}
+
+.col_4 {
+  min-width: 33.3333333333%;
+  max-width: 33.3333333333%;
+}
+
+.col_5 {
+  min-width: 41.6666666667%;
+  max-width: 41.6666666667%;
+}
+
+.col_6 {
+  min-width: 50%;
+  max-width: 50%;
+}
+
+.col_7 {
+  min-width: 58.3333333333%;
+  max-width: 58.3333333333%;
+}
+
+.col_8 {
+  min-width: 66.6666666667%;
+  max-width: 66.6666666667%;
+}
+
+.col_9 {
+  min-width: 75%;
+  max-width: 75%;
+}
+
+.col_10 {
+  min-width: 83.3333333333%;
+  max-width: 83.3333333333%;
+}
+
+.col_11 {
+  min-width: 91.6666666667%;
+  max-width: 91.6666666667%;
+}
+
+.col_12 {
+  min-width: 100%;
+  max-width: 100%;
+}/*# sourceMappingURL=styles.css.map */
