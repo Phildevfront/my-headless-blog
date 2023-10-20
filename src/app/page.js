@@ -1,57 +1,51 @@
 import Card from '@/components/Card/Card';
 import { IconType } from '@/components/Button/Button'
+import config from '@/config'
+import fetchBlogs from '@/helpers/fetch-blogs'
 
-const Home = () => (
+
+const Home = async () => { 
+  const [featuredBlogs, blogs] = await Promise.all([
+    await fetchBlogs('filters[IsFeatured][$eq]=true'),//'&filters[IsFeatured][$eq]=true' parameter passed to fetch function
+    await fetchBlogs('filters[IsFeatured][$eq]=false')
+  ]);
+
+  console.log('featuredBlogs.data', featuredBlogs.data);
+
+  return (
     <div className='container pb-80'>
+      {featuredBlogs.data.map(featuredBlog => (
       <Card 
-        label="Product Reviews"
-        title="Lorem Ipsum sit amet"
-        summary="Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-        Etiam molestie convallis elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-        Cras ac elit mi."
-        href="#"
+        key={featuredBlog.attributes.id}
+        label={featuredBlog.attributes.Category}
+        title={featuredBlog.attributes.Title}
+        summary={featuredBlog.attributes.Summary}
+        href={`/${featuredBlog.attributes.slug}`}
+        imgSrc={`${config.api}${featuredBlog.attributes.FeaturedImage.data.attributes.url}`}
+        imgAlt="Featured Image"
         btnIcon={IconType.ARROW_RIGHT}
         className="mb-30"
       />
+      ))}
+
       <div className='row'>
-        <div className='col col_4 m-mw-100'>
-          <Card 
-            label="Opinions"
-            title="Lorem Ipsum sit amet"
-            summary="Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-            Etiam molestie convallis elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-            Cras ac elit mi."
-            href="#"
-            btnIcon={IconType.ARROW_RIGHT}
-            className="mb-30"
-          />
-        </div>
-        <div className='col col_4 m-mw-100'>
-          <Card 
-              label="Product Reviews"
-              title="Lorem Ipsum sit amet"
-              summary="Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-              Etiam molestie convallis elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-              Cras ac elit mi."
-              href="#"
+        {blogs.data.map(blog => (
+          <div className='col col_4 m-mw-100' key={blog.attributes.id}>
+            <Card 
+              label={blog.attributes.Category}
+              title={blog.attributes.Title}
+              summary={blog.attributes.Summary}
+              href={`/${blog.attributes.slug}`}
+              imgSrc={`${config.api}${blog.attributes.Thumbnail.data.attributes.url}`}
+              imgAlt="Thumbnail"
               btnIcon={IconType.ARROW_RIGHT}
               className="mb-30"
-          />
-        </div>
-        <div className='col col_4 m-mw-100'>
-          <Card 
-            label="Travel Guides"
-            title="Lorem Ipsum sit amet"
-            summary="Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-            Etiam molestie convallis elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-            Cras ac elit mi."
-            href="#"
-            btnIcon={IconType.ARROW_RIGHT}
-            className="mb-30"
-          />
-        </div>
+            />
+          </div>
+        ))}
       </div>
     </div>
-  );
+  )
+  };
 
 export default Home; 

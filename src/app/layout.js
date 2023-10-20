@@ -16,7 +16,6 @@ const openSans = Open_Sans({
 });
 
 
-
 export const metadata = {
   title: 'My Headless Blog',
 };

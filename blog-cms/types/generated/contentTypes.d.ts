@@ -397,6 +397,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
     Content: Attribute.RichText;
     slug: Attribute.String &
       Attribute.Required &
+      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         maxLength: 255;
       }>;
